@@ -21,7 +21,7 @@ function getDefaultParametrs(flag) {
     case "arm":
       greeting = "Ողջույն";
       name = "հյուր";
-      date = "Ամսաթիվ և ժամ";
+      date = "Ամսաթիվ և ժամ:";
       break;
   }
   return [greeting, name, date];

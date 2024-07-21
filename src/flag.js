@@ -17,9 +17,7 @@ function getFlags(arg) {
   checkingFlags(arg, flags);
   const data = setFlags(arg, flags);
 
-  if (data.h || data.help) {
-    console.log(data);
-  }
+  if (data.h || data.help) console.log(data);
   return data;
 }
 
@@ -54,4 +52,4 @@ function checkingFlags(arg, flags) {
   });
 }
 
-export { getFlags };
+export { getFlags, checkingFlags, setFlags };
