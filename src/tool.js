@@ -30,9 +30,9 @@ function getDefaultParametrs(flag) {
 function createString(flag, defGreeting, defName, defDataText) {
   const name = flag["-n"] || flag["--name"] || defName;
   const greeting = flag["-g"] || flag["--greeting"] || defGreeting;
-  const lvl = flag["-lvl"] === "2" || flag["--level"] === "2" ? `(${defDataText} ${getDate()})` : "";
+  const lvl = flag["-lvl"] === "2" || flag["--level"] === "2" ? ` (${defDataText} ${getDate()})` : "";
 
-  return `${greeting} ${name} ${lvl}`;
+  return `${greeting} ${name}${lvl}`;
 }
 
 function getHelpText() {
