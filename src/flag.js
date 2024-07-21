@@ -1,26 +1,46 @@
+import { getHelpText } from "./tool.js";
+
 function getFlags(arg) {
   const flags = {
     "--name": null,
-    "-n": null,
-    "-level": null,
-    "-lvl": null,
+    "--level": null,
     "--language": null,
-    "-l": null,
     "--greeting": null,
+    "--help": false,
+    "-n": null,
+    "-lvl": null,
+    "-l": null,
     "-g": null,
+    "-h": false,
   };
 
   checkingFlags(arg, flags);
-  setFlags(arg, flags);
+  const data = setFlags(arg, flags);
 
-  return flags;
+  if (data.h || data.help) {
+    console.log(data);
+  }
+  return data;
 }
 
-function setFlags(arg, flags) {
-  arg.forEach((el, i, arr) => {
-    if (arr[i + 1] === undefined) return;
-    if (el in flags && !(arr[i + 1] in flags)) flags[el] = arr[i + 1];
-  });
+function setFlags(args, flags) {
+  const clone = { ...flags };
+
+  for (let i = 0; i < args.length; i++) {
+    const el = args[i];
+
+    if (el === "-h" || el === "--help") {
+      console.log(getHelpText());
+      process.exit(1);
+    }
+
+    if (el in clone && args[i + 1] && !(args[i + 1] in clone)) {
+      clone[el] = args[i + 1];
+      i++;
+    }
+  }
+
+  return clone;
 }
 
 function checkingFlags(arg, flags) {

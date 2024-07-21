@@ -5,9 +5,9 @@ function getArguments() {
 }
 
 function getDefaultParametrs(flag) {
-  const lenguage = flag["-l"] || flag["--lenguage"] || "eng";
+  const language = flag["-l"] || flag["--language"] || "eng";
   let greeting, name, date;
-  switch (lenguage) {
+  switch (language) {
     case "eng":
       greeting = "Hello";
       name = "guest";
@@ -30,9 +30,21 @@ function getDefaultParametrs(flag) {
 function createString(flag, defGreeting, defName, defDataText) {
   const name = flag["-n"] || flag["--name"] || defName;
   const greeting = flag["-g"] || flag["--greeting"] || defGreeting;
-  const lvl = flag["-lvl"] === "2" || flag["-level"] === "2" ? `(${defDataText} ${getDate()})` : "";
+  const lvl = flag["-lvl"] === "2" || flag["--level"] === "2" ? `(${defDataText} ${getDate()})` : "";
 
   return `${greeting} ${name} ${lvl}`;
 }
 
-export { getArguments, getDefaultParametrs, createString };
+function getHelpText() {
+  return `
+    usage:  [-n | --name] [-h | --help] [-l | --language]
+            [-g | --greeting] [-lvl --level]
+
+    name: write your name (by default 'guest')
+    language: change language (by default 'eng')
+    greeting: write custom greeting message (by default 'Hello')
+    level: change level (by default '1')
+  `;
+}
+
+export { getArguments, getDefaultParametrs, createString, getHelpText };
