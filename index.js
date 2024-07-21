@@ -1,14 +1,13 @@
-import { getArguments, getFlags, getDate, getDefaultParametrs } from "./tool.js";
+import { getArguments, getDefaultParametrs, createString } from "./src/tool.js";
+import { getFlags } from "./src/flag.js";
 
-const argum = getArguments();
-const flag = getFlags(argum);
+function init() {
+  const arg = getArguments();
+  const flag = getFlags(arg);
 
-const [defGreeting, defName, defDataText] = getDefaultParametrs(flag);
+  const [defGreeting, defName, defDataText] = getDefaultParametrs(flag);
 
-const name = flag["-n"] || flag["--name"] || defName;
-const greeting = flag["-g"] || flag["--greeting"] || defGreeting;
-const lvl = flag["-lvl"] === "1" || flag["-level"] === "1" ? "" : `(${defDataText} ${getDate()})`;
+  return createString(flag, defGreeting, defName, defDataText);
+}
 
-const str = `${greeting} ${name} ${lvl}`;
-
-console.log(str);
+console.log(init());
